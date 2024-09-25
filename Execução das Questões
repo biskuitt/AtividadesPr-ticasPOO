@@ -1,0 +1,381 @@
+Vamos desenvolver cada um dos exercícios práticos de Programação Orientada a Objetos (POO) em Java.
+
+1. Criação de uma Classe Pessoa
+Descrição: Crie uma classe Pessoa com atributos nome, idade e endereço. Adicione métodos para definir e obter esses atributos.
+
+Java
+
+public class Pessoa {
+    private String nome;
+    private int idade;
+    private String endereco;
+
+    // Construtor
+    public Pessoa(String nome, int idade, String endereco) {
+        this.nome = nome;
+        this.idade = idade;
+        this.endereco = endereco;
+    }
+
+    // Métodos getters e setters
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    // Método para exibir informações da pessoa
+    public void exibirInformacoes() {
+        System.out.println("Nome: " + nome);
+        System.out.println("Idade: " + idade);
+        System.out.println("Endereço: " + endereco);
+    }
+}
+
+2. Sistema de Biblioteca
+Descrição: Desenvolva um sistema simples de gerenciamento de biblioteca com classes Livro, Autor e Biblioteca. Implemente métodos para adicionar, remover e listar livros.
+
+Java
+
+import java.util.ArrayList;
+
+class Autor {
+    private String nome;
+
+    public Autor(String nome) {
+        this.nome = nome;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+}
+
+class Livro {
+    private String titulo;
+    private Autor autor;
+
+    public Livro(String titulo, Autor autor) {
+        this.titulo = titulo;
+        this.autor = autor;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public Autor getAutor() {
+        return autor;
+    }
+}
+
+class Biblioteca {
+    private ArrayList<Livro> livros;
+
+    public Biblioteca() {
+        this.livros = new ArrayList<>();
+    }
+
+    public void adicionarLivro(Livro livro) {
+        livros.add(livro);
+    }
+
+    public void removerLivro(Livro livro) {
+        livros.remove(livro);
+    }
+
+    public void listarLivros() {
+        for (Livro livro : livros) {
+            System.out.println("Título: " + livro.getTitulo() + ", Autor: " + livro.getAutor().getNome());
+        }
+    }
+}
+
+3. Calculadora de Área
+Descrição: Crie uma classe FormaGeometrica com métodos para calcular a área de diferentes formas (círculo, quadrado, retângulo). Utilize herança para criar classes específicas como Circulo, Quadrado e Retangulo.
+
+Java
+
+abstract class FormaGeometrica {
+    public abstract double calcularArea();
+}
+
+class Circulo extends FormaGeometrica {
+    private double raio;
+
+    public Circulo(double raio) {
+        this.raio = raio;
+    }
+
+    @Override
+    public double calcularArea() {
+        return Math.PI * raio * raio;
+    }
+}
+
+class Quadrado extends FormaGeometrica {
+    private double lado;
+
+    public Quadrado(double lado) {
+        this.lado = lado;
+    }
+
+    @Override
+    public double calcularArea() {
+        return lado * lado;
+    }
+}
+
+class Retangulo extends FormaGeometrica {
+    private double largura;
+    private double altura;
+
+    public Retangulo(double largura, double altura) {
+        this.largura = largura;
+        this.altura = altura;
+    }
+
+    @Override
+    public double calcularArea() {
+        return largura * altura;
+    }
+}
+
+4. Sistema de Banco
+Descrição: Implemente um sistema bancário com classes Conta, ContaCorrente e ContaPoupanca. Adicione métodos para depósito, saque e transferência.
+
+Java
+
+class Conta {
+    protected double saldo;
+
+    public Conta(double saldoInicial) {
+        this.saldo = saldoInicial;
+    }
+
+    public void depositar(double valor) {
+        saldo += valor;
+    }
+
+    public void sacar(double valor) {
+        if (valor <= saldo) {
+            saldo -= valor;
+        } else {
+            System.out.println("Saldo insuficiente.");
+        }
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+}
+
+class ContaCorrente extends Conta {
+    private double limite;
+
+    public ContaCorrente(double saldoInicial, double limite) {
+        super(saldoInicial);
+        this.limite = limite;
+    }
+
+    @Override
+    public void sacar(double valor) {
+        if (valor <= saldo + limite) {
+            saldo -= valor;
+        } else {
+            System.out.println("Saldo insuficiente.");
+        }
+    }
+}
+
+class ContaPoupanca extends Conta {
+    private double taxaJuros;
+
+    public ContaPoupanca(double saldoInicial, double taxaJuros) {
+        super(saldoInicial);
+        this.taxaJuros = taxaJuros;
+    }
+
+    public void aplicarJuros() {
+        saldo += saldo * taxaJuros;
+    }
+}
+
+5. Gerenciamento de Funcionários
+Descrição: Crie uma classe Funcionario com atributos nome, salario e departamento. Implemente subclasses Gerente e Desenvolvedor com métodos específicos para cada tipo de funcionário.
+
+Java
+
+class Funcionario {
+    protected String nome;
+    protected double salario;
+    protected String departamento;
+
+    public Funcionario(String nome, double salario, String departamento) {
+        this.nome = nome;
+        this.salario = salario;
+        this.departamento = departamento;
+    }
+
+    public void exibirInformacoes() {
+        System.out.println("Nome: " + nome);
+        System.out.println("Salário: " + salario);
+        System.out.println("Departamento: " + departamento);
+    }
+}
+
+class Gerente extends Funcionario {
+    private double bonus;
+
+    public Gerente(String nome, double salario, String departamento, double bonus) {
+        super(nome, salario, departamento);
+        this.bonus = bonus;
+    }
+
+    @Override
+    public void exibirInformacoes() {
+        super.exibirInformacoes();
+        System.out.println("Bônus: " + bonus);
+    }
+}
+
+class Desenvolvedor extends Funcionario {
+    private String linguagem;
+
+    public Desenvolvedor(String nome, double salario, String departamento, String linguagem) {
+        super(nome, salario, departamento);
+        this.linguagem = linguagem;
+    }
+
+    @Override
+    public void exibirInformacoes() {
+        super.exibirInformacoes();
+        System.out.println("Linguagem: " + linguagem);
+    }
+}
+
+6. Sistema de Vendas
+Descrição: Desenvolva um sistema de vendas com classes Produto, Cliente e Pedido. Implemente métodos para adicionar produtos ao pedido e calcular o total da compra.
+
+Java
+
+import java.util.ArrayList;
+
+class Produto {
+    private String nome;
+    private double preco;
+
+    public Produto(String nome, double preco) {
+        this.nome = nome;
+        this.preco = preco;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+}
+
+class Cliente {
+    private String nome;
+
+    public Cliente(String nome) {
+        this.nome = nome;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+}
+
+class Pedido {
+    private Cliente cliente;
+    private ArrayList<Produto> produtos;
+
+    public Pedido(Cliente cliente) {
+        this.cliente = cliente;
+        this.produtos = new ArrayList<>();
+    }
+
+    public void adicionarProduto(Produto produto) {
+        produtos.add(produto);
+    }
+
+    public double calcularTotal() {
+        double total = 0;
+        for (Produto produto : produtos) {
+            total += produto.getPreco();
+        }
+        return total;
+    }
+
+    public void exibirPedido() {
+        System.out.println("Cliente: " + cliente.getNome());
+        for (Produto produto : produtos) {
+            System.out.println("Produto: " + produto.getNome() + ", Preço: " + produto.getPreco());
+        }
+        System.out.println("Total: " + calcularTotal());
+    }
+}
+
+7. Jogo de Cartas
+Descrição: Crie um jogo de cartas simples com classes Carta, Baralho e Jogador. Implemente métodos para embaralhar o baralho e distribuir cartas aos jogadores.
+
+Java
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+class Carta {
+    private String naipe;
+    private String valor;
+
+    public Carta(String naipe, String valor) {
+        this.naipe = naipe;
+        this.valor = valor;
+    }
+
+    public String getNaipe() {
+        return naipe;
+    }
+
+    public String getValor() {
+        return valor;
+    }
+
+    @Override
+    public String toString() {
+        return valor + " de " + naipe;
+    }
+}
+
+class Baralho {
+    private ArrayList<Carta> cartas;
+
+    public Baralho() {
+        cartas = new ArrayList<>();
+        String[] naipes = {"Copas", "Espadas", "Ouros", "Paus"};
+        String[] valores = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A
+
+
